@@ -1,0 +1,49 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "جنسیت شما چیست؟",
+      "questionType": "soloSelect",
+      "answers": [
+        { "id": "a", "text": "مرد", "next": 2 },
+        { "id": "b", "text": "زن", "next": 2 },
+        { "id": "c", "text": "ترجیح می‌دهم نگویم", "next": 3 }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "سن شما در چه بازه‌ای قرار دارد؟",
+      "questionType": "soloSelect",
+      "answers": [
+        { "id": "a", "text": "زیر ۱۸ سال", "next": 4 },
+        { "id": "b", "text": "۱۸ تا ۳۵ سال", "next": 4 },
+        { "id": "c", "text": "بیشتر از ۳۵ سال", "next": 4 }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "آیا برای ادامه نظرسنجی راحت هستید؟",
+      "questionType": "soloSelect",
+      "answers": [
+        { "id": "a", "text": "بله", "next": 2 },
+        { "id": "b", "text": "خیر", "next": null }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "به کدام‌یک از خدمات زیر بیشتر علاقه‌مند هستید؟",
+      "questionType": "multiSelect",
+      "answers": [
+        { "id": "a", "text": "آموزش آنلاین", "next": 5 },
+        { "id": "b", "text": "فروشگاه اینترنتی", "next": 5 },
+        { "id": "c", "text": "مطالعه مقالات", "next": 5 }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "لطفاً نظر خود را درباره تجربه کاربری سایت بیان کنید.",
+      "questionType": "text",
+      "answers": []
+    }
+  ]
+}
