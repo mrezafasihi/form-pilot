@@ -1,6 +1,5 @@
 import { useState, type Dispatch, type SetStateAction } from "react";
 import ProgressBar from "./ProgressBar";
-import type { userAnswers } from "./Questionnaire";
 
 type IQuestionType = "soloSelect" | "multiSelect" | "text";
 interface IAnswers {
@@ -18,20 +17,16 @@ interface IQestionProp {
   data: IData[];
   setActiveStep: Dispatch<SetStateAction<number>>;
   activeStep: number;
-  setPageRoute: Dispatch<SetStateAction<number[]>>;
-  pageRoute: number[];
-  setUserAnswers: Dispatch<SetStateAction<userAnswers>>;
-  userAnswers: userAnswers;
+  setStepHistory: Dispatch<SetStateAction<number[]>>;
+  stepHistory: number[];
 }
 
 function Questions({
   data,
   setActiveStep,
-  setPageRoute,
-  pageRoute,
+  setStepHistory,
+  stepHistory,
   activeStep,
-  setUserAnswers,
-  userAnswers,
 }: IQestionProp) {
   const [idAnswer, setIdAnswer] = useState<string | string[]>("");
   const { answers, id, question, questionType } = data[activeStep - 1];
@@ -120,8 +115,10 @@ function Questions({
   };
   return (
     <div className="flex flex-col justify-around items-center min-h-screen mx-3 py-10">
-      <div className="bg-white rounded-xl w-full text-center py-28">
-        {question}
+      <div className="bg-white rounded-2xl shadow-lg w-full max-w-2xl p-8 mb-8">
+        <h2 className="text-2xl font-semibold text-gray-800 leading-relaxed">
+          {question}
+        </h2>
       </div>
       {renderInput()}
       <div className="flex flex-col gap-3">
@@ -137,7 +134,7 @@ function Questions({
               setActiveStep(
                 chossenAnswer ? chossenAnswer.next : activeStep + 1
               );
-              setPageRoute([...pageRoute, id]);
+              setStepHistory([...stepHistory, id]);
               setIdAnswer("");
             }}
             disabled={!idAnswer}
@@ -147,14 +144,16 @@ function Questions({
           <button
             className="cursor-pointer px-6 py-2 rounded-lg bg-white text-gray-700 border border-gray-400 shadow-sm hover:bg-gray-200 hover:shadow-md transition-all duration-200 font-semibold"
             onClick={() => {
-              setActiveStep(pageRoute[pageRoute.length - 1]);
-              pageRoute.pop();
+              setActiveStep(stepHistory[stepHistory.length - 1]);
+              stepHistory.pop();
             }}
           >
             قبلی
           </button>
         </div>
-        <ProgressBar percent={(pageRoute.length / data.length) * 100} />
+        <ProgressBar
+          percent={Math.floor((stepHistory.length / data.length) * 100)}
+        />
       </div>
     </div>
   );

@@ -26,7 +26,7 @@
       "questionType": "soloSelect",
       "answers": [
         { "id": "a", "text": "بله", "next": 2 },
-        { "id": "b", "text": "خیر", "next": null }
+        { "id": "b", "text": "خیر", "next": -1 }
       ]
     },
     {
@@ -43,7 +43,16 @@
       "id": 5,
       "question": "لطفاً نظر خود را درباره تجربه کاربری سایت بیان کنید.",
       "questionType": "text",
-      "answers": []
+      "answers": [{ "next": -1 }]
+    },
+    {
+      "id": 6,
+      "question": "آیا این نظرسنجی برای شما مفید بود؟",
+      "questionType": "soloSelect",
+      "answers": [
+        { "id": "a", "text": "بله", "next": -1 },
+        { "id": "b", "text": "خیر", "next": -1 }
+      ]
     }
   ]
 }

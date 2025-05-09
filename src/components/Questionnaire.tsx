@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import GetStart from "./GetStart";
 import Questions from "./Questions";
+import End from "./End";
 
-export type userAnswers=Record<number,string>
+export type userAnswers = Record<number, string>;
 
 function Questionnaire() {
   const [activeStep, setActiveStep] = useState(0);
-  const [qData, setQData] = useState();
-  const [pageRoute, setPageRoute] = useState([0]);
-  const [userAnswers,setUserAnswers]=useState<userAnswers[]>([])
+  const [questionData, setQuestionData] = useState([]);
+  const [stepHistory, setStepHistory] = useState([0]);
 
   const fetchData = async () => {
     try {
       const response = await fetch("http://localhost:3000/questions");
       const jsonQuestionnaire = await response.json();
-      setQData(jsonQuestionnaire);
+      setQuestionData(jsonQuestionnaire);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -23,20 +23,20 @@ function Questionnaire() {
   useEffect(() => {
     fetchData();
   }, []);
-
+  console.log(activeStep);
   return (
     <div className="bg-[#e4e6ea] min-h-screen">
       {activeStep === 0 ? (
-        <GetStart setActiveStep={setActiveStep} setPageRoute={setPageRoute} />
+        <GetStart setActiveStep={setActiveStep} setPageRoute={setStepHistory} />
+      ) : activeStep === -1 ? (
+        <End />
       ) : (
         <Questions
-          data={qData}
+          data={questionData}
           setActiveStep={setActiveStep}
           activeStep={activeStep}
-          setPageRoute={setPageRoute}
-          pageRoute={pageRoute}
-          setUserAnswers={setUserAnswers}
-          userAnswers={userAnswers}
+          setStepHistory={setStepHistory}
+          stepHistory={stepHistory}
         />
       )}
     </div>
